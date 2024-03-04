@@ -1,0 +1,82 @@
+<style>
+    .icon-hover:hover {
+  border-color: #3b71ca !important;
+  background-color: white !important;
+  color: #3b71ca !important;
+}
+
+.icon-hover:hover i {
+  color: #3b71ca !important;
+}
+</style>
+
+
+<header>
+  <!-- Jumbotron -->
+  <div class="p-3 text-center bg-white border-bottom">
+    <div class="container">
+      <div class="row gy-3">
+        </header>
+      
+<!-- content -->
+<section class="py-5">
+  <div class="container">
+    <div class="row gx-5">
+      <aside class="col-lg-6">
+       {{#each product}}
+
+        <div class="border rounded-4 mb-3 d-flex justify-content-center">
+          {{!-- <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp"> --}}
+            <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="/product-image/{{this._id}}.jpg" />
+          </a>
+        </div>
+        <!-- thumbs-wrap.// -->
+        <!-- gallery-wrap .end// -->
+      </aside>
+      
+      <main class="col-lg-6">
+        <div class="ps-lg-3">
+          <h4 class="title text-dark">
+            {{this.Name}}
+          </h4>
+          <div class="d-flex flex-row my-3">
+            <div class="text-warning mb-1 me-2">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+              <span class="ms-1">
+                4.5
+              </span>
+            </div>
+            <span class="text-muted"><i class="fas fa-shopping-basket fa-sm mx-1"></i>154 orders</span>
+            <span class="text-success ms-2">In stock</span>
+          </div>
+
+          <div class="mb-3">
+            <span class="h5">₹{{this.Price}}</span>
+            
+          </div>
+
+          <p>
+            {{this.Description}}
+          </p>
+
+         
+
+          <hr />
+
+         
+          
+          <button onclick="addToCart('{{this._id}}')" class="btn btn-primary btn-primary shadow-0 ">  <i class="me-1 fa fa-shopping-basket"></i>Add to Cart </button>
+        
+        </div>
+      </main>
+      {{/each}}
+    </div>
+  </div>
+</section>
+<!-- content -->
+
+      

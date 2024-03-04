@@ -1,0 +1,138 @@
+
+<section class="h-100 h-custom" >
+  <div class="container h-100 py-5">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col">
+
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" class="h5">YOUR PRODUCTS</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Remove</th>
+              </tr>
+            </thead>
+            <tbody>
+                {{#each product}}
+              <tr>
+                
+                <th scope="row">
+                  <div class="d-flex align-items-center">
+                    <img src="./product-image/{{this.product._id}}.jpg" class="img-fluid rounded-3"
+                      style="width: 120px;" alt="products">
+                    <div class="flex-column ms-4">
+                      <p class="mb-2">{{this.product.Name}}</p>
+                    
+                    </div>
+                  </div>
+
+                 
+                </th>
+                <td class="align-middle">
+                  <p class="mb-0" style="font-weight: 500;">{{this.product.Price}}</p>
+                </td>
+              
+                <td class="align-middle">
+                  <div class="d-flex flex-row">
+                    <button class="btn btn-link px-2" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',-1)"> <i class="bi bi-dash-circle"></i> </button>
+                    <span  min="0" name="quantity"class="form-control form-control-sm" style="width: 50px;" id="{{this.product._id}}">{{this.quantity}}</span>
+                    <button class="btn btn-link px-2" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',1)"> <i class="bi bi-plus-circle"></i></button>
+                  </div>
+                </td>
+                <td class="align-middle">
+                <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                <a href="/remove-product" id="Remove" class="text-danger"  onclick="removeProduct('{{this._id}}','{{this.product._id}}')"><i class="bi bi-trash3"></i></a>
+              </div>
+              </td>
+
+                
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+           <div class="card mb-5">
+          <div class="card-body p-4">
+
+            <div class="float-end">
+              <p class="mb-0 me-5 d-flex align-items-center">
+                <span class="small text-muted me-2">Order total:</span>RS. <span
+                  class="lead fw-normal" id="total">{{totalValue}}</span>
+              </p>
+            </div>
+
+          </div>
+        </div>
+        <div class="d-flex justify-content-end">
+          <a href="/"  class="btn btn-light btn-lg me-2">Continue shopping</a>
+          <a  href="/Place-Order" class="btn btn-primary btn-lg">Place Order</a>
+        </div>
+        </div>
+            </div>
+
+          </div>
+        </div>
+</section>
+<script>
+ 
+ 
+    
+    
+  function changeQuantity(cartId,proId,userId,count){
+   let quantity=parseInt(document.getElementById(proId).innerHTML)
+    count=parseInt(count) 
+    $.ajax({
+      url:'/change-product-Quantity',
+      data:{
+        user:userId,
+        cart:cartId,
+        product:proId,
+        count:count,
+        quantity:quantity
+      },
+      method:'post',
+      success:(response)=>{
+         if(response.removeProduct){
+               alert("Product Removed From cart")
+               location.reload()
+            }else{
+              document.getElementById(proId).innerHTML=quantity+count
+               document.getElementById('total').innerHTML =response.total
+            } 
+      }
+    })
+   }
+
+       function removeProduct(cartId, proId) {
+        $.ajax({
+            url: '/remove-product',
+            data: {
+                product: proId,
+                cart: cartId,
+            },
+            method: 'post',
+           
+            success: (response) => {
+                if (response.removeProduct) {
+                  alert("Are you sure you want to delete this item?")
+                    location.reload()
+
+                } else {
+                    document.getElementById(proId).innerHTML =  response.removeProduct
+                   
+                                         
+                }
+            }
+        });
+
+    };
+
+
+
+  
+</script>
+
+       
+
+      

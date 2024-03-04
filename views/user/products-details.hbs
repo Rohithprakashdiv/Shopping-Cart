@@ -1,0 +1,126 @@
+<style>
+  body{
+    background:#eee;
+}
+.card {
+    box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: 1rem;
+}
+.text-reset {
+    --bs-text-opacity: 1;
+    color: inherit!important;
+}
+a {
+    color: #5465ff;
+    text-decoration: none;
+}
+</style>
+
+
+
+<div class="container-fluid">
+
+<div class="container">
+  <!-- Title -->
+  {{#each details}}
+  <div class="d-flex justify-content-between align-items-center py-3">
+    <h2 class="h5 mb-0"><a href="#" class="text-muted"></a> Order #{{this._id}}</h2>
+  </div>
+
+  <!-- Main content -->
+  <div class="row">
+    <div class="col-lg-8">
+      <!-- Details -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="mb-3 d-flex justify-content-between">
+            <div>
+              <span class="me-3">{{this.date}}</span>
+              <span class="me-3">#{{this._id}}</span>
+              <span class="badge rounded-pill bg-info">SHIPPING</span>
+            </div>
+            {{!-- <div class="d-flex">
+              <button class="btn btn-link p-0 me-3 d-none d-lg-block btn-icon-text"><i class="bi bi-download"></i> <span class="text">Invoice</span></button>
+              
+            </div> --}}
+          </div>
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                  <!-- Payment -->
+      <div class=" mb-4">
+        <div class="card-body">
+          <div class="row">
+
+              <div class="col-lg-6">
+              <h3 class="h6">Billing address</h3>
+              <address>
+                <strong>{{this.deliveryDetalis.fname}}.{{this.deliveryDetalis.sname}}</strong><br>
+                {{this.deliveryDetalis.address}}-{{this.deliveryDetalis.pincode}}<br>
+
+                <abbr title="Phone">P:</abbr> {{this.deliveryDetalis.mobile}}
+              </address>
+            </div>
+            <div class="col-lg-6">
+              <h3 class="h6">Payment Method</h3>
+              <p>{{this.paymentmetMethod}} <br>
+              Total:₹.{{this.totalAmount}}<span class="badge bg-success rounded-pill">{{this.Status}}</span></p>
+            </div>
+          
+          </div>
+        </div>
+      </div>
+              </tr>
+             
+            </tbody>
+            <tfoot>
+             
+              <tr class="fw-bold">
+                <td colspan="2">TOTAL</td>
+                <td class="text-end">₹.{{this.totalAmount}}</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    
+    </div>
+    <div class="col-lg-4">
+      <!-- Customer Notes -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h3 class="h6">Customer Notes</h3>
+          <p>Hey,{{this.deliveryDetalis.fname}}, just want to drop a quick note to express our genuine gratitude. 
+            Your purchase allows us at Shopping Cart to continue to do what we love and provide you with quality products. </p>
+        </div>
+      </div>
+      <div class="card mb-4">
+        <!-- Shipping information -->
+        <div class="card-body">
+          <h3 class="h6">Shipping Information</h3>
+          
+          <hr>
+          <h3 class="h6">Address</h3>
+         <address>
+                <strong>{{this.deliveryDetalis.fname}}.{{this.deliveryDetalis.sname}}</strong><br>
+                {{this.deliveryDetalis.address}}-{{this.deliveryDetalis.pincode}}<br>
+
+                <abbr title="Phone">P:</abbr> {{this.deliveryDetalis.mobile}}
+              </address>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>
+  </div>

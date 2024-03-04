@@ -1,0 +1,153 @@
+<style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+   
+  <body class="bg-light">
+    
+<div class="container">
+  <main style="padding-top: 80px;">
+    
+
+     
+      <div class="col-md-12 col-lg-12">
+        <h4 class="mb-3">Billing address</h4>
+
+        <form class="needs-validation" action=" " id="checkout-form">
+
+          <div class="col-md-4 " style="float: right; padding-left:30px; padding-top:20px;">
+        <div class="card mb-4">
+          <div class="card-header py-3">
+            <h5 class="mb-0">Summary</h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <h4 class="mb-3">Payment</h4>
+
+          <div class="my-3">
+            <div class="form-check">
+              <input id="credit" name="paymentMethod" type="radio" class="form-check-input"  value="cod" checked required>
+              <label class="form-check-label" for="credit">COD</label>
+            </div>
+            <div class="form-check">
+              <input id="debit" name="paymentMethod" type="radio" class="form-check-input" value="online"  required>
+              <label class="form-check-label" for="debit">Online Payment</label>
+            </div>
+            
+          </div>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                <div>
+                  <strong>Total amount</strong>
+                  <strong>
+                    <p class="mb-0">(including VAT)</p>
+                  </strong>
+                </div>
+                <span><strong>RS.{{total}}</strong></span>
+              </li>
+            </ul>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">
+              Go to checkout
+            </button>
+
+            
+          </div>
+        </div>
+        </div>
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="firstName" class="form-label">First name</label>
+              <input type="text" class="form-control" id="firstName" placeholder="" name="fname" required>
+              <input type="text" name="userId" id="" value="{{user._id}}" hidden>
+              <div class="invalid-feedback" id="error">
+                 
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="lastName" class="form-label">Last name</label>
+              <input type="text" class="form-control" id="lastName" placeholder="" name="sname" required>
+              <div class="invalid-feedback" id="error2">
+                
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com">
+              <div class="invalid-feedback" id="error3">
+                
+              </div>
+
+            </div>
+             <div class="col-sm-6">
+              <label for="lastName" class="form-label">Mobile</label>
+              <input type="text" class="form-control" id="lastName" placeholder="" name="mobile" required>
+              <div class="invalid-feedback" id="error4">
+                
+              </div>
+            </div>
+
+
+            <div class="col-12">
+              <label for="address" class="form-label">Address</label>
+              <input type="text" class="form-control" id="address" placeholder="1234 Main St" name="address" required>
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
+              <input type="text" class="form-control" id="address2" placeholder="Apartment or suite" name="address2" >
+            </div>
+
+            
+
+            <div class="col-md-3">
+              <label for="zip" class="form-label">Pincode</label>
+              <input type="text" class="form-control" id="zip" placeholder=""  name="pincode" required>
+              <div class="invalid-feedback">
+                Zip code required.
+              </div>
+            </div>
+          </div>
+          
+         
+        </form>
+      </div>
+      
+    </div>
+  </main>
+  <script>
+    $('#checkout-form').submit((e)=>{
+      e.preventDefault()
+       $.ajax({
+        url:'/place-order',
+        method:'post',
+        data:$('#checkout-form').serialize(),
+        success:(response)=>{
+          
+          if(response.Status){
+            location.href='/success';
+          }
+        }
+
+
+       })
+    })
+  </script>
